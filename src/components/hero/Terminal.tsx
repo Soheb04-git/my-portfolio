@@ -5,7 +5,7 @@ import { certification, profile, projects, skillGroups } from "@/data/portfolio"
 type Line = { kind: "cmd" | "out" | "err"; text: string };
 
 const COMMANDS: Record<string, () => string[]> = {
-  help: () => ["whoami   projects   skills   cert   contact   clear"],
+  help: () => ["whoami   projects   skills   cert   contact   clear   clr"],
   whoami: () => [`${profile.name}`, "B.Tech CSE, BCET Durgapur, 7th semester"],
   projects: () => projects.map((p) => `${p.index}  ${p.name.toLowerCase()}  ${p.tagline.toLowerCase()}`),
   skills: () => skillGroups.slice(0, 4).map((g) => `${g.key.padEnd(6)} ${g.items.join(", ")}`),
@@ -13,9 +13,8 @@ const COMMANDS: Record<string, () => string[]> = {
   contact: () => [profile.email, "github.com/Soheb04-git"],
 };
 
-const QUICK = ["whoami", "projects", "skills", "contact"];
+const QUICK = ["whoami", "projects", "skills", "contact", "clr"];
 
-/** A small working shell. Content mirrors the HTML sections below, so nothing lives only here. */
 export function Terminal() {
   const [lines, setLines] = useState<Line[]>([
     { kind: "out", text: "soheb-os 1.0  type 'help' or pick a command" },
@@ -27,7 +26,7 @@ export function Terminal() {
   const run = (raw: string) => {
     const cmd = raw.trim().toLowerCase();
     if (!cmd) return;
-    if (cmd === "clear") {
+    if (cmd === "clear" || cmd === "clr") {
       setLines([]);
       return;
     }

@@ -1,4 +1,4 @@
-import portrait from "@/assets/soheb-portrait.webp.asset.json";
+import portrait from "@/assets/my-profile.png";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 
@@ -18,7 +18,7 @@ export function About() {
         <Reveal className="md:col-span-4">
           <figure className="ticks relative overflow-hidden border border-line bg-surface">
             <img
-              src={portrait.url}
+              src={portrait}
               alt="MD Soheb Ansari, wearing a dark blazer and light blue shirt"
               width={900}
               height={1200}

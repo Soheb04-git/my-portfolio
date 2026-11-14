@@ -1,4 +1,4 @@
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { documents, navItems, profile } from "@/data/portfolio";
@@ -10,6 +10,12 @@ export function SiteNav() {
   const [active, setActive] = useState<string>("home");
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
+
+  useEffect(() => {
+  const savedTheme = localStorage.getItem("portfolio-theme");
+  setTheme(savedTheme === "light" ? "light" : "dark");
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -38,6 +44,17 @@ export function SiteNav() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
+
+  const toggleTheme = () => {
+  const nextTheme = theme === "dark" ? "light" : "dark";
+
+  setTheme(nextTheme);
+  localStorage.setItem("portfolio-theme", nextTheme);
+
+  document.documentElement.classList.toggle("light", nextTheme === "light");
+  document.documentElement.classList.toggle("dark", nextTheme === "dark");
+  document.documentElement.style.colorScheme = nextTheme;
+};
 
   const resume = documents.resume;
 
@@ -76,6 +93,17 @@ export function SiteNav() {
         </ul>
 
         <div className="flex items-center gap-2">
+
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className={cn(buttonVariants({ variant: "frame", size: "icon" }), "size-11")}
+            aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+            title={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+          >
+            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
+
           <a
             href={resume.href ?? "#documents"}
             {...(resume.href ? { download: resume.filename } : {})}

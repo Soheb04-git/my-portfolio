@@ -3,8 +3,8 @@
  * Facts come from the owner's brief and the public GitHub repositories.
  * Keep copy factual: no invented metrics, roles or achievements.
  */
-import greenPreview from "@/assets/greentogether-preview.webp.asset.json";
-import diagnoPreview from "@/assets/diagnofra-preview.webp.asset.json";
+import greenPreview from "@/assets/greentogether-preview.png";
+import diagnoPreview from "@/assets/diagnofra-preview.png";
 
 export const profile = {
   name: "MD Soheb Ansari",
@@ -16,18 +16,26 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/md-soheb-ansari-608a52291/",
 };
 
+
 /**
- * Original PDFs. Set `href` to "/documents/<file>.pdf" once the files are
- * placed in public/documents. While `href` is null the UI shows a clearly
- * marked "file pending" state instead of a broken download.
+ * CV and Resume PDF files stored in public/documents.
  */
 export const documents: {
   cv: { label: string; href: string | null; filename: string };
   resume: { label: string; href: string | null; filename: string };
 } = {
-  cv: { label: "Download CV", href: null, filename: "Soheb CV.pdf" },
-  resume: { label: "Download Resume", href: null, filename: "Md Soheb Ansari.pdf" },
+  cv: {
+    label: "Download CV",
+    href: "/documents/Md Soheb Ansari CV.pdf",
+    filename: "Md Soheb Ansari-CV.pdf",
+  },
+  resume: {
+    label: "Download Resume",
+    href: "/documents/Md Soheb Ansari Resume.pdf",
+    filename: "Md Soheb Ansari-Resume.pdf",
+  },
 };
+
 
 export const navItems = [
   { id: "home", label: "Home" },
@@ -117,7 +125,7 @@ export const projects: Project[] = [
     live: "https://green-together-32sx.vercel.app/",
     repo: "https://github.com/Soheb04-git/GreenTogether",
     preview: {
-      src: greenPreview.url,
+      src: greenPreview,
       alt: "GreenTogether landing page with a city illustration, registration buttons and navigation",
     },
   },
@@ -157,7 +165,7 @@ export const projects: Project[] = [
     live: "https://diagno-fra.vercel.app/",
     repo: "https://github.com/Soheb04-git/DiagnoFRA",
     preview: {
-      src: diagnoPreview.url,
+      src: diagnoPreview,
       alt: "DiagnoFRA analysis dashboard showing fault detection status and magnitude and phase response charts",
     },
   },
